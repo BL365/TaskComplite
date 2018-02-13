@@ -1,0 +1,55 @@
+
+<h2 align="center">Мои заметки</h2>
+
+
+<hr>
+<table border="1px">
+  <td>
+    <input *ngFor="let field of fields">
+  </td>
+  <tr>
+  <button (click)="add(nameTXT, detailsTXT, dateTXT)">Добавить</button>
+</tr>
+</table>
+<!--<tr>Name: {{ nameTXT }}</tr>-->
+<!--<tr>Details: {{ detailsTXT }}</tr>-->
+<!--<tr>Date: {{ dateTXT }}</tr>-->
+
+<table class="tasks" border="0px" align="center">
+  <thead>
+    <td>Id</td>
+    <td>Name</td>
+    <td>Details</td>
+    <td>Date</td>
+  </thead>
+  <td>
+    <tr *ngFor="let taskItem of retTask">
+      {{taskItem.id}}
+    </tr>
+  </td>
+  <td>
+    <tr *ngFor="let taskItem of retTask">
+      {{taskItem.name}}
+    </tr>
+  </td>
+  <td>
+    <tr *ngFor="let taskItem of retTask">
+      {{taskItem.details}}
+    </tr>
+  </td>
+  <td>
+    <tr *ngFor="let taskItem of retTask">
+      {{taskItem.date}}
+    </tr>
+  </td>
+  <td>
+    <tr *ngFor="let taskItem of retTask">
+      <button (click)="change(taskItem)" >Изменить</button>
+    </tr>
+  </td>
+  <td>
+    <tr *ngFor="let taskItem of retTask">
+      <button (click)="del(taskItem)">Удалить</button>
+    </tr>
+  </td>
+</table>
