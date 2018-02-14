@@ -2,7 +2,7 @@
 <h2 align="center">Мои заметки</h2>
 <hr>
 
-<table>
+<table border="0">
   <td width="30%"></td>
     <td><table>
     <tr *ngFor="let task of tasks"
@@ -17,9 +17,9 @@
       <!--</div>-->
       <td><button (click)="del(task.id)">Удалить</button></td>
     </tr>
-    </table></td>
+    </table></td><td width="10%"></td>
 <td>
-  <table border="0px" cellspacing="2" width="30%" align="right">
+  <table border="0px" width="30%">
   <tr>
     <td width="20px">Название:</td>
     <td><input #taskName /></td>
