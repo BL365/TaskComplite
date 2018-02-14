@@ -2,94 +2,62 @@
 <h2 align="center">Мои заметки</h2>
 <hr>
 
-
-  <ul class="tasks">
+<table>
+  <td width="30%"></td>
+    <td><table>
     <tr *ngFor="let task of tasks"
         [class.selected]="task === selectedTask"
         (click)="onSelect(task)">
-      <td>{{task.name}}</td>
-      <td width="10"></td>
-      <td><span class="badge">{{task.details}}</span></td>
-      <td width="10"></td>
-      <td>{{task.date}}</td>
+      <!--<div class="">-->
+        <td>{{task.name}}</td>
+        <td width="10"></td>
+        <td>{{task.details}}</td>
+        <td width="10"></td>
+        <td>{{task.date}}</td>
+      <!--</div>-->
       <td><button (click)="del(task.id)">Удалить</button></td>
     </tr>
-  </ul>
-
-
-<div>
-  <tr>Task name:
-    <input #taskName />
+    </table></td>
+<td>
+  <table border="0px" cellspacing="2" width="30%" align="right">
+  <tr>
+    <td width="20px">Название:</td>
+    <td><input #taskName /></td>
   </tr>
-  <tr>Task details:
-    <input #taskDetails />
+  <tr><td>Детали:</td>
+    <td><input #taskDetails /></td>
   </tr>
-  <tr>Task date:
-    <input #taskDate />
+  <tr><td>Дата:</td>
+    <td><input #taskDate /></td>
   </tr>
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(taskName.value, taskDetails.value, taskDate.value);
+    <td></td><div align="right"><button (click)="add(taskName.value, taskDetails.value, taskDate.value);
   taskName.value=''; taskDetails.value=''; taskDate.value=''">
-    add
+    Добавить
   </button>
-</div>
+  </div>
+  </table>
+</td>
 
-
-<div *ngIf="flag">
+<tr><td></td><td>
+<table *ngIf="flag" border="0px">
   <h2>{{ selectedTask.name }}</h2>
   <!--<div><span>id: </span>{{selectedTask.id}}</div>-->
-  <tr>name:
-    <input [(ngModel)]="selectedTask.name" placeholder="name">
+  <tr><td width="5px">Название:</td>
+    <td><input [(ngModel)]="selectedTask.name" placeholder="name"></td>
   </tr>
-  <tr>details:
-    <input [(ngModel)]="selectedTask.details" placeholder="details">
+
+  <tr><td>Детали:</td>
+    <td><input [(ngModel)]="selectedTask.details" placeholder="details"></td>
   </tr>
-  <tr>date:
-    <input [(ngModel)]="selectedTask.date" placeholder="date">
+  <tr><td>Дата:</td>
+    <td><input [(ngModel)]="selectedTask.date" placeholder="date"></td>
   <tr>
   <tr>
-    <button (click)="clear()">Отмена</button>
-    <button (click)="change(selectedTask)">Изменить</button>
+    <td></td><td><button (click)="clear()">Отмена</button>
+    <button (click)="change(selectedTask)">Изменить</button></td>
   </tr>
-</div>
-
-
-<!--<table class="tasks" border="0px" align="center">-->
-  <!--<thead>-->
-    <!--<td>Id</td>-->
-    <!--<td>Name</td>-->
-    <!--<td>Details</td>-->
-    <!--<td>Date</td>-->
-  <!--</thead>-->
-  <!--<td>-->
-    <!--<tr *ngFor="let task of retTask"-->
-    <!--(click)="onSelect(task)">-->
-      <!--{{task.id}}-->
-    <!--</tr>-->
-  <!--</td>-->
-  <!--<td>-->
-    <!--<tr *ngFor="let task of retTask">-->
-      <!--{{task.name}}-->
-    <!--</tr>-->
-  <!--</td>-->
-  <!--<td>-->
-    <!--<tr *ngFor="let task of retTask">-->
-      <!--{{task.details}}-->
-    <!--</tr>-->
-  <!--</td>-->
-  <!--<td>-->
-    <!--<tr *ngFor="let task of retTask">-->
-      <!--{{task.date}}-->
-    <!--</tr>-->
-  <!--</td>-->
-  <!--<td>-->
-    <!--<tr *ngFor="let taskItem of retTask">-->
-      <!--<button (click)="change(taskItem)" >Изменить</button>-->
-    <!--</tr>-->
-  <!--</td>-->
-  <!--<td>-->
-    <!--<tr *ngFor="let taskItem of retTask">-->
-      <!--<button (click)="del(taskItem)">Удалить</button>-->
-    <!--</tr>-->
-  <!--</td>-->
-<!--</table>-->
+</table>
+</td>
+</tr>
+</table>
