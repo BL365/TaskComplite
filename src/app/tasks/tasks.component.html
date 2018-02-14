@@ -1,55 +1,95 @@
 
 <h2 align="center">Мои заметки</h2>
-
-
 <hr>
-<table border="1px">
-  <td>
-    <input *ngFor="let field of fields">
-  </td>
-  <tr>
-  <button (click)="add(nameTXT, detailsTXT, dateTXT)">Добавить</button>
-</tr>
-</table>
-<!--<tr>Name: {{ nameTXT }}</tr>-->
-<!--<tr>Details: {{ detailsTXT }}</tr>-->
-<!--<tr>Date: {{ dateTXT }}</tr>-->
 
-<table class="tasks" border="0px" align="center">
-  <thead>
-    <td>Id</td>
-    <td>Name</td>
-    <td>Details</td>
-    <td>Date</td>
-  </thead>
-  <td>
-    <tr *ngFor="let taskItem of retTask">
-      {{taskItem.id}}
+
+  <ul class="tasks">
+    <tr *ngFor="let task of tasks"
+        [class.selected]="task === selectedTask"
+        (click)="onSelect(task)">
+      <td>{{task.name}}</td>
+      <td width="10"></td>
+      <td><span class="badge">{{task.details}}</span></td>
+      <td width="10"></td>
+      <td>{{task.date}}</td>
+      <td><button (click)="del(task.id)">Удалить</button></td>
     </tr>
-  </td>
-  <td>
-    <tr *ngFor="let taskItem of retTask">
-      {{taskItem.name}}
-    </tr>
-  </td>
-  <td>
-    <tr *ngFor="let taskItem of retTask">
-      {{taskItem.details}}
-    </tr>
-  </td>
-  <td>
-    <tr *ngFor="let taskItem of retTask">
-      {{taskItem.date}}
-    </tr>
-  </td>
-  <td>
-    <tr *ngFor="let taskItem of retTask">
-      <button (click)="change(taskItem)" >Изменить</button>
-    </tr>
-  </td>
-  <td>
-    <tr *ngFor="let taskItem of retTask">
-      <button (click)="del(taskItem)">Удалить</button>
-    </tr>
-  </td>
-</table>
+  </ul>
+
+
+<div>
+  <tr>Task name:
+    <input #taskName />
+  </tr>
+  <tr>Task details:
+    <input #taskDetails />
+  </tr>
+  <tr>Task date:
+    <input #taskDate />
+  </tr>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(taskName.value, taskDetails.value, taskDate.value);
+  taskName.value=''; taskDetails.value=''; taskDate.value=''">
+    add
+  </button>
+</div>
+
+
+<div *ngIf="flag">
+  <h2>{{ selectedTask.name }}</h2>
+  <!--<div><span>id: </span>{{selectedTask.id}}</div>-->
+  <tr>name:
+    <input [(ngModel)]="selectedTask.name" placeholder="name">
+  </tr>
+  <tr>details:
+    <input [(ngModel)]="selectedTask.details" placeholder="details">
+  </tr>
+  <tr>date:
+    <input [(ngModel)]="selectedTask.date" placeholder="date">
+  <tr>
+  <tr>
+    <button (click)="clear()">Отмена</button>
+    <button (click)="change(selectedTask)">Изменить</button>
+  </tr>
+</div>
+
+
+<!--<table class="tasks" border="0px" align="center">-->
+  <!--<thead>-->
+    <!--<td>Id</td>-->
+    <!--<td>Name</td>-->
+    <!--<td>Details</td>-->
+    <!--<td>Date</td>-->
+  <!--</thead>-->
+  <!--<td>-->
+    <!--<tr *ngFor="let task of retTask"-->
+    <!--(click)="onSelect(task)">-->
+      <!--{{task.id}}-->
+    <!--</tr>-->
+  <!--</td>-->
+  <!--<td>-->
+    <!--<tr *ngFor="let task of retTask">-->
+      <!--{{task.name}}-->
+    <!--</tr>-->
+  <!--</td>-->
+  <!--<td>-->
+    <!--<tr *ngFor="let task of retTask">-->
+      <!--{{task.details}}-->
+    <!--</tr>-->
+  <!--</td>-->
+  <!--<td>-->
+    <!--<tr *ngFor="let task of retTask">-->
+      <!--{{task.date}}-->
+    <!--</tr>-->
+  <!--</td>-->
+  <!--<td>-->
+    <!--<tr *ngFor="let taskItem of retTask">-->
+      <!--<button (click)="change(taskItem)" >Изменить</button>-->
+    <!--</tr>-->
+  <!--</td>-->
+  <!--<td>-->
+    <!--<tr *ngFor="let taskItem of retTask">-->
+      <!--<button (click)="del(taskItem)">Удалить</button>-->
+    <!--</tr>-->
+  <!--</td>-->
+<!--</table>-->

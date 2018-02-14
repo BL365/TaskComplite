@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Task } from './task';
+import { TASKS } from './det-task';
 
 @Component({
   selector: 'app-root',

@@ -10,56 +10,51 @@ import { FormsModule} from '@angular/forms';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-  nameTXT = '';
-  detailsTXT = '';
-  dateTXT = '';
   tasks = JSON.stringify(TASKS);
-  retTask = [];
   constructor() {
   localStorage.setItem('MyTasks', this.tasks);
-  this.retTask = JSON.parse(localStorage.getItem('MyTasks'));
+  this.tasks = JSON.parse(localStorage.getItem('MyTasks'));
  }
+  flag = false;
+  selectedTask: Task;
+  onSelect(task: Task): void {
+    this.selectedTask = task;
+    this.flag = true;
+    console.log(typeof(this.selectedTask));
+  }
+
   add = function (nameTXT, detailsTXT, dateTXT) {
-    console.log(nameTXT, detailsTXT, dateTXT, typeof(nameTXT));
-    const id: number = this.retTask.length + 1;
+    const id: number = this.tasks.length + 1;
     const newTask = {id: id, name: nameTXT, details: detailsTXT, date: dateTXT};
-    this.retTask.push(newTask);
+    this.tasks.push(newTask);
     JSON.stringify(this.tasks);
     localStorage.setItem('MyTasks', this.retTask);
-    console.log(this.retTask);
-  };
-
-  change = function (taskItem) {
-    this.nameTXT = Number(taskItem.id);
-    this.onKeyUp(taskItem.name);
-    this.onKeyUp2(taskItem.details);
-    this.onKeyUp3(taskItem.date);
-
+    console.log(this.tasks);
   };
 
   del = function (taskItem) {
-    this.retTask.pop(Number(taskItem.id));
+    this.tasks.pop(Number(taskItem.id));
     console.log('task ', taskItem.name, ' удалена');
-    JSON.stringify(this.retTask);
-    localStorage.setItem('MyTasks', this.retTask);
+    JSON.stringify(this.tasks);
+    localStorage.setItem('MyTasks', this.tasks);
   };
-  onKeyUp(value) {
-    this.nameTXT = value;
 
-  }
-  onKeyUp2(value) {
-   this.detailsTXT = value;
-
-  }
-  onKeyUp3(value) {
-    this.dateTXT = value;
-
+  clear() {
+    this.flag = false;
   }
 
-
-
-
+  change = function (selectedTask) {/*id, name, details, date*/
+    for (const t of this.tasks) {
+      if (t.id === selectedTask.id) {
+        this.tasks.pop(t.id);
+        this.tasks.push(selectedTask);
+        JSON.stringify(this.tasks);
+        localStorage.setItem('MyTasks', this.tasks);
+        this.clear();
+        break;
+      }
+    }
+  };
   ngOnInit() {
   }
-
 }
